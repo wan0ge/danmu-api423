@@ -20,7 +20,7 @@ import {
 
 let globals;
 
-async function handleRequest(req, env, deployPlatform, clientIp) {
+async function handleRequest(req, env, deployPlatform, clientIp, ctx) {
   // 加载全局变量和环境变量配置
   globals = Globals.init(env);
 
@@ -32,7 +32,7 @@ async function handleRequest(req, env, deployPlatform, clientIp) {
   const isDataDependentRequest = path.includes('/search') || path.includes('/match');
 
   if (globals.useBangumiData) {
-      await initBangumiData(deployPlatform, isDataDependentRequest);
+      await initBangumiData(deployPlatform, isDataDependentRequest, ctx);
   }
 
   globals.deployPlatform = deployPlatform;
