@@ -31,7 +31,7 @@ const DOWNLOAD_TIMEOUT_MS = 20000;
  * @param {boolean} isDataDependentRequest - 当前是否为强依赖数据的核心接口请求
  * @returns {Promise<void>}
  */
-export async function initBangumiData(deployPlatform, isDataDependentRequest = false) {
+export async function initBangumiData(deployPlatform, isDataDependentRequest = false, ctx = null) {
     if (!globals.useBangumiData) return;
 
     let cachePath = null;
