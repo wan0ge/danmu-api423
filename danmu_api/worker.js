@@ -651,7 +651,7 @@ export default {
     // 获取客户端的真实 IP
     const clientIp = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || 'unknown';
 
-    return handleRequest(request, env, isRunningOnVercel() ? "vercel" : "cloudflare", clientIp);
+    return handleRequest(request, env, isRunningOnVercel() ? "vercel" : "cloudflare", clientIp, ctx);
   },
 };
 
