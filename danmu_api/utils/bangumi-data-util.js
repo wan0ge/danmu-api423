@@ -118,6 +118,11 @@ export async function initBangumiData(deployPlatform, isDataDependentRequest = f
             await downloadPromise; 
         } else {
             log("info", `[Bangumi-Data] 当前非核心请求，数据获取转入后台异步执行`);
+            // 调用 ctx，告诉 Serverless 引擎跑完这个 Promise 再冻结
+            if (ctx && typeof ctx.waitUntil === 'function') {
+                log("info", `[Bangumi-Data] 调用 ctx.waitUntil 延长 Serverless 生命周期`);
+                ctx.waitUntil(downloadPromise);
+            }
         }
     } else if (isDataDependentRequest) {
         log("info", `[Bangumi-Data] 正在等待基础数据下载完成...`);
